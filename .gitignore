@@ -139,3 +139,4 @@ cython_debug/
 
 #User ignores
 /manual_data
+envInit.bat

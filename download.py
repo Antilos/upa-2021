@@ -1,6 +1,8 @@
 import os, json, re
+import argparse
 from io import StringIO
 from datetime import datetime
+from typing import Optional
 import requests
 import pandas as pd
 import pymongo
@@ -88,7 +90,8 @@ class DataDownloader:
 
 def get_database():
     # Provide the mongodb atlas url to connect python to mongodb using pymongo
-    CONNECTION_STRING = "mongodb+srv://xkocal00:xkocal00_upa_2021@xkocal00-upa-2021.0z2ty.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    CONNECTION_STRING = f"mongodb+srv://{os.environ.get('MONGODB_USERNAME')}:{os.environ.get('MONGODB_PASSWD')}@xkocal00-upa-2021.0z2ty.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    print(CONNECTION_STRING)
 
     # Create a connection using MongoClient. You can import MongoClient or use pymongo.MongoClient
     client = pymongo.MongoClient(CONNECTION_STRING)
@@ -109,29 +112,61 @@ def mongoimport(csv_path, db_name, coll_name, db_url='localhost', db_port=27000)
     coll.insert(payload)
     return coll.count()
 
-def import_df_to_mongo(df, db, coll_name):
+def import_df_to_mongo(df, db, coll_name, clear=False):
     coll = db[coll_name]
     payload = json.loads(df.to_json(orient='records'))
     coll.remove()
     coll.insert(payload)
     return coll.count()
 
+def insert_df_to_mongo(df, db, coll_name):
+    coll = db[coll_name]
+    payload = df.to_dict(orient='records')
+    coll.insert_many(payload)
+
+def parseArguments():
+    parser = argparse.ArgumentParser(description='Process some integers.')
+    parser.add_argument('--local', action='store_true',
+                        help='Save downloaded data locally instead of uploading to database')
+    parser.add_argument('--load', required=False,
+                        help='Load data from folder instead of uploading to database')
+    parser.add_argument('--drop-db', action='store_true',
+                        help='Drop databases before import')
+
+    return parser.parse_args()
+
 def main():
-    downlader = DataDownloader()
-    data = downlader.download_data()
-    for df in data[0]:
-        print(df.head())
-    print(data[1].head())
-    return
+    args = parseArguments()
 
-    #cut into collections
-
-    #load data into database
     db = get_database()
-    n = import_df_to_mongo(data[0], db, "nrpzs")
-    print(f"Imported {n} documents to collection nrpzs")
-    n = import_df_to_mongo(data[1], db, "czso")
-    print(f"Imported {n} documents to collection czso")
+    if args.drop_db:
+        db['nrpzs'].drop()
+        db['czso'].drop()
+
+    if args.load:
+        ...
+    else:
+        downlader = DataDownloader()
+        data = downlader.download_data()
+    
+    if args.local:
+        ...
+    else:
+        #cut into collections
+
+        #load data into database
+        for i, df in enumerate(data[0]):
+            print(f"{datetime.now().strftime('%H:%M:%S')}|Importing data from {df['retrieved'].iloc(0)} into database")
+            n = insert_df_to_mongo(df, db, "nrpzs")
+        print(f"Imported {n} documents to collection nrpzs")
+        print(f"{datetime.now().strftime('%H:%M:%S')}|Importing data czso data into database")
+        n = insert_df_to_mongo(data[1], db, "czso")
+        print(f"Imported {n} documents to collection czso")
+
+        #create indexes
+        db["nrpzs"].create_index('retrieved')
+
+
 
 if __name__ == '__main__':
     main()
