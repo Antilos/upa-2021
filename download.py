@@ -32,7 +32,7 @@ class DataDownloader:
         self.czso_cols = czso_cols
         self.folder = folder
 
-    def download_data(self):
+    def download_data(self, all_nrpzs=False):
         #create the target directory if it doesn't exist
         if not os.path.isdir(self.folder):
             os.mkdir(self.folder)
@@ -47,7 +47,10 @@ class DataDownloader:
             r.raise_for_status()
             soup = BeautifulSoup(r.text, 'html.parser')
             if soup:
-                links = soup.find_all("a", href=re.compile(r"export-sluzby-.*?-.*?.csv")) #find all links with data format in href
+                if all_nrpzs: # Too mutch data
+                    links = soup.find_all("a", href=re.compile(r"export-sluzby-.*?-.*?.csv")) #find all links with data format in href
+                else: 
+                    links = soup.find_all("a", href=re.compile(r"export-sluzby-2021-11.csv")) #newest data set
                 for link in links:
                     #download data
                     href = link.get('href')
@@ -157,14 +160,15 @@ def main():
         #load data into database
         for i, df in enumerate(data[0]):
             print(f"{datetime.now().strftime('%H:%M:%S')}|Importing data from {df['retrieved'].iloc(0)} into database")
-            n = insert_df_to_mongo(df, db, "nrpzs")
-        print(f"Imported {n} documents to collection nrpzs")
+            insert_df_to_mongo(df, db, "nrpzs")
+
         print(f"{datetime.now().strftime('%H:%M:%S')}|Importing data czso data into database")
-        n = insert_df_to_mongo(data[1], db, "czso")
-        print(f"Imported {n} documents to collection czso")
+        insert_df_to_mongo(data[1], db, "czso")
 
         #create indexes
         db["nrpzs"].create_index('retrieved')
+        db["nrpzs"].create_index('OborPece')
+        db["nrpzs"].create_index('KrajKod')
 
 
 
