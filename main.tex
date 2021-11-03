@@ -44,7 +44,7 @@ Tato část projektu se zabývá seznámením se s vybraným tématem, analýzou
 Byla zkoumána data ze zadaných zdrojů (\href{https://nrpzs.uzis.cz/index.php?pg=home--download&archiv=sluzby}{Národní registr poskytovatelů zdravotních služeb} a \href{https://www.czso.cz/csu/czso/obyvatelstvo-podle-petiletych-vekovych-skupin-a-pohlavi-v-krajich-a-okresech}{data Českého statistického úřadu o obyvatelstvu ČR}). Na základě analýzy datových sad a jejich struktury byla pro jejich uložení zvolena NoSQL databáze MongoDB. Data nejsou tvořena časovými řadami, takže nevyhovuje InfluxDB, ani se nehodí uložení dat pomocí grafové databáze Neo4j. 
 
 \subsection{Načtení dat ze zdrojů}
-Pro získání dat ze zadaných zdrojů byl vytvořen skript \texttt{download.py}. Tento skript také nahrává data do cloudové databáze. 
+Pro získání dat ze zadaných zdrojů byl vytvořen skript \texttt{download.py}. Tento skript také nahrává data do cloudové databáze. Při načítání dat a předzpracování je použita knihovna Pandas.
 
 Pro většinu zadaných dotazů jsou potřeba pouze aktuální data, ale pro druhý dotaz skupiny A je potřeba získat i historii poskytovatelů zdravotních služeb. Při práci z daty bylo zjištěno, že historická data jsou velice objemná a je problematické je uložit do použité cloudové databáze. Tento problém byl aktuálně vyřešen načtením pouze nejnovějšího datového souboru (historie by se pak určovala pomocí údaje \texttt{DatumZahajeniCinnosti}). Alternativně by mohl být problém vyřešen redukcí historických dat na nezbytně nutné položky nebo ukládáním pouze souhrných hodnot pro každý kraj v daném čtvrtletí.
 
@@ -57,7 +57,7 @@ Dotazy \textbf{skupiny B} využívají dat z obou zadaných zdrojů. První dota
 
 Druhý dotaz bude také zpracovávat údaje o obyvatelstvu podle věkové kategorie a kraje. Dále bude využívat záznamy o celkovém počtu obyvatel v kraji. Záznamy o poskytovatelích zdravotních služeb bude vybírat podle položek \texttt{DruhZarizeniKod}, \texttt{OborPece} a \texttt{KrajKod}.
 
-Výsledky těchto dotazů se budou zobrazovat jako hodnoty souhrných počtů v grafech, a proto jsou některé další informace zbytěčné. Skript proto po načtení hodnot ze zdrojů odstraňuje nevyužívané atributy před nahráním dat do databáze.
+Výsledky těchto dotazů se budou zobrazovat jako hodnoty souhrných počtů v grafech, a proto jsou některé další informace zbytečné. Skript proto po načtení hodnot ze zdrojů odstraňuje nevyužívané atributy před nahráním dat do databáze.
 
 Dotazy \textbf{skupiny C} budou využívat údaje počtu obyvatel v městech podle věkových skupin. Údaje o poskytovatelích rozdělí podle obcí a následně podle oborů péče.
 
