@@ -53,6 +53,12 @@ Ze zkoumání zadaných dotazů a struktury dat vyplynulo, že některé atribut
 
 Druhý dotaz \textbf{skupiny A} využívá pro práci z daty pouze položku obor péče. Jako jediný zpracovává ale i historické údaje, proto je pro něj potřeba načíst i~starší datové soubory o poskytovatelích zdravotních služeb. Protože využívá pouze položku obor péče, bylo by možné historické záznamy ukládat pouze jako trojice ("\texttt{ZdravotnickeZarizeniId}", "\texttt{OborPece}", "datum vytvoření datového souboru, do kterého záznam patří") nebo rovnou jako celkové počty poskytovatelů oborů pro každé čtvrtletí.
 
+Dotazy \textbf{skupiny B} využívají dat z obou zadaných zdrojů. První dotaz bude vždy vytvářet součty pro každý kraj. Z dat o obyvatelstvu se použijí záznamy vyjadřující celkový počet mužů/žen ve věkových kategoriích 20 let a více kraji. Záznamy o poskytovatelích se seskupí podle položky \texttt{KrajKod}, potom se vyberou záznamy podle položky \texttt{OborPece} a výsledkem budou počty záznamů ve skupinách. Dotaz bude vyhodnocovat poměr těchto počtů pro každý kraj.
+
+Druhý dotaz bude také zpracovávat údaje o obyvatelstvu podle věkové kategorie a kraje. Dále bude využívat záznamy o celkovém počtu obyvatel v kraji. Záznamy o poskytovatelích zdravotních služeb bude vybírat podle položek \texttt{DruhZarizeniKod}, \texttt{OborPece} a \texttt{KrajKod}.
+
+Výsledky těchto dotazů se budou zobrazovat jako hodnoty souhrných počtů v grafech, a proto jsou některé další informace zbytěčné. Skript proto po načtení hodnot ze zdrojů odstraňuje nevyužívané atributy před nahráním dat do databáze.
+
 
 
 \subsection{Uložení dat do databáze}
