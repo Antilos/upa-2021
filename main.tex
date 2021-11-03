@@ -1,0 +1,63 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[czech]{babel}
+\usepackage[left=15mm,text={18cm,25cm},top=25mm]{geometry}
+\usepackage[IL2]{fontenc}
+\usepackage{times}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\usepackage{hyperref}
+
+\theoremstyle{definition}
+\newtheorem{myDef}{Definice}
+
+\theoremstyle{plain}
+\newtheorem{myLem}{Věta}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+\begin{titlepage}
+    \begin{center}
+    \Huge
+    \textsc{Fakulta informačních technologií \\[0.4em] Vysoké učení technické v~Brně}\\
+    \vspace{\stretch{0.382}}
+    \LARGE Ukládání a příprava dat\,–-\,projekt\\[0.3em]
+    Zdravotnictví v ČR\\
+    \vspace{\stretch{0.618}}
+    \end{center}
+    {\Large 2021 \hfill Jakub Kočalka (xkocal00), Jiří Žilka (xzilka11)}
+\end{titlepage}
+
+\section*{Úvod}
+
+Z~nabízených témat bylo vybráno téma číslo 2: Zdravotnictví v~ČR. Cílem projektu je seznámit se se zpracováním rozsáhlých/nestrukturovaných dat, seznámit se s~přípravou těchto dat pro další využití (např. pro získávání znalostí z~databází) a~tvorbou popisných charakteristik pro zvolená data.
+
+\section{Návrh zpracování a uložení dat}
+Tato část projektu se zabývá seznámením se s vybraným tématem, analýzou dat z nabízených zdrojů, návrhu způsobu získání datových sad z daných zdrojů, výběru vhodné NoSQL databáze a uložení dat do zvolené databáze.
+
+Byla zkoumána data ze zadaných zdrojů (\href{https://nrpzs.uzis.cz/index.php?pg=home--download&archiv=sluzby}{Národní registr poskytovatelů zdravotních služeb} a \href{https://www.czso.cz/csu/czso/obyvatelstvo-podle-petiletych-vekovych-skupin-a-pohlavi-v-krajich-a-okresech}{data Českého statistického úřadu o obyvatelstvu ČR}). Na základě analýzy datových sad a jejich struktury byla pro jejich uložení zvolena NoSQL databáze MongoDB. Data nejsou tvořena časovými řadami, takže nevyhovuje InfluxDB, ani se nehodí uložení dat pomocí grafové databáze Neo4j. 
+
+\subsection{Načtení dat ze zdrojů}
+Pro získání dat ze zadaných zdrojů byl vytvořen skript \texttt{download.py}. Tento skript také nahrává data do cloudové databáze. 
+
+Pro většinu zadaných dotazů jsou potřeba pouze aktuální data, ale pro druhý dotaz skupiny A je potřeba získat i historii poskytovatelů zdravotních služeb. Při práci z daty bylo zjištěno, že historická data jsou velice objemná a je problematické je uložit do použité cloudové databáze. Tento problém byl aktuálně vyřešen načtením pouze nejnovějšího datového souboru (historie by se pak určovala pomocí údaje \texttt{DatumZahajeniCinnosti}). Alternativně by mohl být problém vyřešen redukcí historických dat na nezbytně nutné položky nebo ukládáním pouze souhrných hodnot pro každý kraj v daném čtvrtletí.
+
+\subsection{Příprava dat}
+Ze zkoumání zadaných dotazů a struktury dat vyplynulo, že některé atributy dat nebudou použity a tedy je možné je vypustit. Pro první dotaz \textbf{skupiny A} jsou v záznamech potřebné pouze údaje o kraji a okresu, oboru péče. Pro vyhodnocení dotazu jsou poutřebné pouze aktuální data.
+
+Druhý dotaz \textbf{skupiny A} využívá pro práci z daty pouze položku obor péče. Jako jediný zpracovává ale i historické údaje, proto je pro něj potřeba načíst i~starší datové soubory o poskytovatelích zdravotních služeb. Protože využívá pouze položku obor péče, bylo by možné historické záznamy ukládat pouze jako trojice ("\texttt{ZdravotnickeZarizeniId}", "\texttt{OborPece}", "datum vytvoření datového souboru, do kterého záznam patří") nebo rovnou jako celkové počty poskytovatelů oborů pro každé čtvrtletí.
+
+
+
+\subsection{Uložení dat do databáze}
+Skript \texttt{download.py} i k vytvoření Mongo klienta pro připojení ke cloudové databázi a následné vytvoření databáze. Připravená data z obou zadaných zdrojů nahrává do databáze, pokud není použit argument \texttt{--local}. 
+
+\section{Implementovaný systém pro získání, ukládání a zpracování dat}
+
+\end{document}
