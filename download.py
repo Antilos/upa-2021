@@ -49,6 +49,15 @@ class DataDownloader:
             if soup:
                 if all_nrpzs: # Too mutch data
                     links = soup.find_all("a", href=re.compile(r"export-sluzby-.*?-.*?.csv")) #find all links with data format in href
+                    currentMonth = datetime.now().month
+                    linksMod3 = [] # download only modulo 3
+                    for link in links:
+                        href = link.get('href')
+                        date = re.search(r'export-sluzby-(.*?-.*?).csv', href)[1]
+                        aYear, aMonth = date.split("-")
+                        if int(aMonth) % 3 == currentMonth % 3:
+                            linksMod3.append(link)
+                    links = linksMod3
                 else: 
                     links = soup.find_all("a", href=re.compile(r"export-sluzby-2021-11.csv")) #newest data set
                 for link in links:
