@@ -62,7 +62,7 @@ Výsledky těchto dotazů se budou zobrazovat jako hodnoty souhrných počtů v 
 Dotazy \textbf{skupiny C} budou využívat údaje počtu obyvatel v městech podle věkových skupin. Údaje o poskytovatelích rozdělí podle obcí a následně podle oborů péče.
 
 \subsection{Uložení dat do databáze}
-Skript \texttt{download.py} i k vytvoření Mongo klienta pro připojení ke cloudové databázi a následné vytvoření databáze. Připravená data z obou zadaných zdrojů nahrává do databáze, pokud není použit argument \texttt{--local}. 
+Skript \texttt{download.py} vytvoří Mongo klienta pro připojení ke cloudové databázi a následně vytvoří databáze. Connection string se získává z proměnné prostředí (environment variable). Připravená data z obou zadaných zdrojů nahrává do databáze, pokud není použit argument \texttt{--local}. 
 
 \section{Implementovaný systém pro získání, ukládání a zpracování dat}
 
