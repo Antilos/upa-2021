@@ -1,0 +1,211 @@
+,OborPece,OborCount,isBrno
+0,klinická onkologie,26,yes
+1,hygiena a epidemiologie,4,yes
+2,otorinolaryngologie a chirurgie hlavy a krku,58,yes
+3,dětská revmatologie,3,yes
+4,gastroenterologie,29,yes
+5,nefrologie,22,yes
+6,farmaceutická kontrola,1,yes
+7,Odborný pracovník v ochraně a podpoře veřejného zdraví,1,yes
+8,lékařská genetika,16,yes
+9,dětská chirurgie,7,yes
+10,sexuologie,16,yes
+11,dětská a dorostová psychiatrie,18,yes
+12,psychiatrie,84,yes
+13,Klinický psycholog,90,yes
+14,dětské lékařství,5,yes
+15,intenzívní medicína,8,yes
+16,neurochirurgie,16,yes
+17,dětská gastroenterologie a hepatologie,3,yes
+18,hrudní chirurgie,13,yes
+19,dětská nefrologie,3,yes
+20,koloproktologie,7,yes
+21,gynekologie dětí a dospívajících,9,yes
+22,geriatrie,10,yes
+23,dětská urologie,5,yes
+24,urogynekologie,8,yes
+25,intervenční radiologie,5,yes
+26,spondylochirurgie,3,yes
+27,dermatovenerologie,94,yes
+28,Ortotik-protetik,9,yes
+29,pracovní lékařství,11,yes
+30,soudní lékařství,1,yes
+31,Zubní technik,140,yes
+32,dětská neurologie,18,yes
+33,Porodní asistentka,25,yes
+34,anesteziologie a intenzivní medicína,86,yes
+35,lékařská mikrobiologie,9,yes
+36,neuroradiologie,5,yes
+37,ortodoncie,44,yes
+38,Adiktolog,4,yes
+39,ortopedie a traumatologie pohybového ústrojí,93,yes
+40,dětská dermatovenerologie,5,yes
+41,urgentní medicína,5,yes
+42,onkochirurgie,13,yes
+43,perinatologie a fetomaternální medicína,6,yes
+44,epidemiologie,3,yes
+45,alergologie a klinická imunologie,49,yes
+46,kardiologie,58,yes
+47,nukleární medicína,5,yes
+48,Sestra pro péči v psychiatrii,1,yes
+49,Klinický logoped,55,yes
+50,klinická farmacie,2,yes
+51,klinická stomatologie,32,yes
+52,infekční lékařství,17,yes
+53,veobecné praktické lékařství,433,yes
+54,orální a maxilofaciální chirurgie,21,yes
+55,dětská otorinolaryngologie,14,yes
+56,maxilofaciální chirurgie,4,yes
+57,Fyzioterapeut,230,yes
+58,foniatrie,21,yes
+59,Radiologický asistent,1,yes
+60,onkologická farmacie,1,yes
+61,kardiochirurgie,6,yes
+62,Odborný pracovník v laboratorních  metodách a přípravě léčivých přípravků,1,yes
+63,vaskulární intervenční radiologie,4,yes
+64,vnitřní lékařství,142,yes
+65,radiofarmaka,1,yes
+66,rehabilitační a fyzikální medicína,60,yes
+67,Farmaceutický asistent,1,yes
+68,onkogynekologie,11,yes
+69,nemocniční lékárenství,3,yes
+70,dětská pneumologie,5,yes
+71,praktické lékařství pro děti a dorost,134,yes
+72,oftalmologie,76,yes
+73,reprodukční medicína,14,yes
+74,Ortoptista,6,yes
+75,algeziologie,23,yes
+76,návykové nemoci,3,yes
+77,hematologie a transfúzní lékařství,38,yes
+78,farmaceutická technologie,3,yes
+79,popáleninová medicína,7,yes
+80,Veobecná sestra,71,yes
+81,,80,yes
+82,zubní lékařství,403,yes
+83,paliativní medicína,21,yes
+84,klinická výiva a intenzivní metabolická péče,9,yes
+85,klinická farmakologie,4,yes
+86,dorostové lékařství,2,yes
+87,dětská radiologie,6,yes
+88,klinická biochemie,42,yes
+89,klinická osteologie,7,yes
+90,Zdravotní laborant,2,yes
+91,neurologie,83,yes
+92,pneumologie a ftizeologie,26,yes
+93,onkourologie,8,yes
+94,Asistent ochrany a podpory veřejného zdraví,1,yes
+95,gynekologie a porodnictví,178,yes
+96,dětská endokrinologie a diabetologie,3,yes
+97,angiologie,23,yes
+98,praktické lékárenství,216,yes
+99,Nutriční terapeut,14,yes
+100,psychosomatika,6,yes
+101,Ergoterapeut,11,yes
+102,radiologie a zobrazovací metody,52,yes
+103,dětská onkologie a hematologie,6,yes
+104,chirurgie,114,yes
+105,endokrinologie a diabetologie,54,yes
+106,neonatologie,12,yes
+107,patologie,6,yes
+108,traumatologie,30,yes
+109,revmatologie,35,yes
+110,cévní chirurgie,19,yes
+111,plastická chirurgie,116,yes
+112,Optometrista,79,yes
+113,korektivní dermatologie,13,yes
+114,pediatrie,10,yes
+115,tělovýchovné lékařství,13,yes
+116,urologie,50,yes
+117,Dentální hygienistka,71,yes
+118,dětská kardiologie,13,yes
+119,gerontopsychiatrie,8,yes
+120,radiační onkologie,2,yes
+0,Zdravotní laborant,5,no
+1,klinická biochemie,24,no
+2,laboratorní a vyetřovací metody ve zdravotnictví,1,no
+3,dermatovenerologie,34,no
+4,Ortotik-protetik,1,no
+5,paliativní medicína,17,no
+6,zubní lékařství,292,no
+7,urogynekologie,2,no
+8,,106,no
+9,Veobecná sestra,96,no
+10,geriatrie,10,no
+11,farmaceutická technologie,1,no
+12,hematologie a transfúzní lékařství,17,no
+13,dětská gastroenterologie a hepatologie,2,no
+14,dětská nefrologie,3,no
+15,dětské lékařství,38,no
+16,Klinický psycholog,38,no
+17,algeziologie,6,no
+18,psychiatrie,51,no
+19,dětská a dorostová psychiatrie,3,no
+20,reprodukční medicína,1,no
+21,Ortoptista,1,no
+22,sexuologie,2,no
+23,oftalmologie,42,no
+24,lékařská genetika,1,no
+25,praktické lékařství pro děti a dorost,137,no
+26,medicína dlouhodobé péče,1,no
+27,farmaceutická kontrola,1,no
+28,Zdravotně-sociální pracovník,1,no
+29,nemocniční lékárenství,2,no
+30,Farmaceutický asistent,1,no
+31,nefrologie,16,no
+32,rehabilitační a fyzikální medicína,57,no
+33,Radiologický fyzik,1,no
+34,gastroenterologie,19,no
+35,radiofarmaka,1,no
+36,vnitřní lékařství,106,no
+37,otorinolaryngologie a chirurgie hlavy a krku,36,no
+38,Odborný pracovník v laboratorních  metodách a přípravě léčivých přípravků,2,no
+39,klinická onkologie,8,no
+40,radiační onkologie,2,no
+41,Dentální hygienistka,31,no
+42,urologie,34,no
+43,tělovýchovné lékařství,5,no
+44,pediatrie,3,no
+45,Optometrista,46,no
+46,dětská kardiologie,6,no
+47,plastická chirurgie,4,no
+48,Radiologický asistent,5,no
+49,cévní chirurgie,4,no
+50,revmatologie,15,no
+51,Fyzioterapeut,119,no
+52,foniatrie,5,no
+53,patologie,7,no
+54,neonatologie,9,no
+55,dětská otorinolaryngologie,1,no
+56,traumatologie,8,no
+57,veobecné praktické lékařství,445,no
+58,infekční lékařství,12,no
+59,endokrinologie a diabetologie,35,no
+60,orální a maxilofaciální chirurgie,7,no
+61,chirurgie,54,no
+62,klinická stomatologie,9,no
+63,Klinický logoped,33,no
+64,Sestra pro péči v psychiatrii,4,no
+65,radiologie a zobrazovací metody,30,no
+66,klinická farmacie,2,no
+67,Ergoterapeut,13,no
+68,alergologie a klinická imunologie,28,no
+69,kardiologie,24,no
+70,nukleární medicína,2,no
+71,epidemiologie,2,no
+72,urgentní medicína,2,no
+73,Nutriční terapeut,8,no
+74,praktické lékárenství,168,no
+75,ortopedie a traumatologie pohybového ústrojí,62,no
+76,Adiktolog,1,no
+77,ortodoncie,23,no
+78,gynekologie a porodnictví,129,no
+79,lékařská mikrobiologie,8,no
+80,angiologie,10,no
+81,anesteziologie a intenzivní medicína,20,no
+82,Porodní asistentka,15,no
+83,dětská endokrinologie a diabetologie,2,no
+84,pneumologie a ftizeologie,25,no
+85,Praktická sestra,1,no
+86,dětská neurologie,10,no
+87,Zubní technik,84,no
+88,neurologie,43,no
