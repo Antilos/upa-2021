@@ -1,29 +1,21 @@
 # plotA1.py
 # Jiří Žilka (xzilka11)
 # UPA 2021/2022
+# question A1 - plot result
 
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-import seaborn as sns
-from seaborn.categorical import barplot
 
 csv_file = "queryA1.csv"
 df = pd.read_csv(csv_file,index_col='OborPece')
-#print(df)
-
 
 OborPeceList = ['Fyzioterapeut','Zubní technik','hematologie a transfúzní lékařství','Dentální hygienistka',
 'dermatovenerologie','kardiologie','radiologie a zobrazovací metody','angiologie','pneumologie a ftizeologie',
 'endokrinologie a diabetologie','Optometrista','chirurgie','vnitřní lékařství',
 'klinická biochemie','dětské lékařství'] # choose 15 OborPece values
-#xpoints = np.array(OborPeceList)
-df2 = df.loc[OborPeceList]
-print(df2)
 
-#sns.barplot(x='OborPece',y='OborCount',hue='isBrno',data=df2,palette='hls',order=['yes','no'])
-#plt.show()
-#exit()
+df2 = df.loc[OborPeceList]
 
 OborCountsYB = []
 OborCountsNB = []
@@ -35,36 +27,7 @@ for obor in OborPeceList:
     nb = a.where(a['isBrno']=='no') 
     nb = nb.dropna(axis='index')
     OborCountsNB.append(int(nb['OborCount']))
-    #print(a)
-    #print('yesbrno')
-    #print(yb)
-    #print('nobrno')
-    #print(nb)
     
-print(OborCountsYB)
-print(OborCountsNB)
-"""
-barWidth = 0.25
-fig,ax = plt.subplots()#figsize =(12, 8)
-x1 = np.arange(len(OborPeceList))
-x2 = [x + barWidth for x in x1]
-
-plt.bar(x1, OborCountsYB, color ='b', width = barWidth,
-        edgecolor ='grey', label ='Brno')
-plt.bar(x2, OborCountsNB, color ='r', width = barWidth,
-        edgecolor ='grey', label ='Zbytek')
- 
-# Adding Xticks
-plt.xlabel('Obor', fontweight ='bold', fontsize = 15)
-plt.ylabel('Počet poskytovatelů', fontweight ='bold', fontsize = 15)
-plt.xticks([x + barWidth/2 for x in range(len(OborPeceList))],
-        OborPeceList, rotation='vertical')
-plt.legend()
-plt.tight_layout()
-plt.grid(axis='y')
-plt.show()
-"""
-
 fig,ax = plt.subplots()
 barWidth = 0.25
 y1 = np.arange(len(OborPeceList))
