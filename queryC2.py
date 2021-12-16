@@ -10,6 +10,7 @@ from numpy.testing._private.utils import tempdir
 from pandas.core.algorithms import factorize
 from pymongo import MongoClient
 from pprint import pprint
+import pandas as pd
 from pandas import DataFrame
 from pandas import Series
 from pandas import merge
@@ -64,7 +65,18 @@ for obor in obory20:
         oborCountDict[a['_id']] = a['OborCount']
     oborCountDictList.append(oborCountDict)   
 
+
+
 df = DataFrame.from_records(oborCountDictList)
+# print(df)
+
+#normalize col 2019-03
+df = df.astype({'2019-03':'float'})
+for i, row in df.iterrows():
+    df.loc[i, "2019-03"] = float(row["2019-03"]) / float(row.max())
+
+#discretize col 2018-12
+df["2018-12"] = pd.cut(df["2018-12"], [0,100,1000, float("inf")])
 print(df)
 
 csv_file = "queryC2.csv"
