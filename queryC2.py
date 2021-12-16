@@ -1,5 +1,5 @@
 # queryC2.py
-# Jiří Žilka (xzilka11)
+# Jiří Žilka (xzilka11) Jakub Kočalka (xkocal00)
 # UPA 2021/2022
 # question C2 - get data from DB
 
@@ -41,7 +41,6 @@ serverStatusResult=db.command("serverStatus")
 
 dbaux = client['upa']
 nrpzs = dbaux['nrpzs']
-#czso = dbaux['czso']
 
 result0 = nrpzs.find_one(sort=[("retrieved",-1)])
 newestDate = result0['retrieved']
@@ -60,7 +59,6 @@ for obor in obory20:
         { '$match': {'OborPece':obor}},
         { '$group': { '_id': '$retrieved', 'OborCount': { '$sum': 1 }} },
         { '$sort' : {'_id':1}},
-        #{ '$project': {'OborPece':1,'retrieved':1,'OborCount':1}}    
     ] )
     for a in result:
         oborCountDict[a['_id']] = a['OborCount']
@@ -69,55 +67,5 @@ for obor in obory20:
 df = DataFrame.from_records(oborCountDictList)
 print(df)
 
-
-
 csv_file = "queryC2.csv"
 df.to_csv(csv_file)
-
-exit()
-
-result1 = nrpzs.aggregate( [
-    { '$match': {'OborPece':obor, 'retrieved':newestDate}},
-    { '$group': { '_id':'$KrajKod', 'OborCount': { '$sum': 1 } } }
-    #,{ '$project': {'OborPece':1,'retrieved':1,'OborCount':1}}    
-] )
-df1 = DataFrame(list(result1))
-#print(df1)
-
-df1_1 = replaceKrajKod(df1,krajDict)
-#print(df1_1)
-
-krajList = list(krajDict.values())
-#result2_0 = czso.find({'vuzemi_kod':{'$in':krajList}}).limit(10)
-#print(DataFrame(list(result2_0)))
-#result2_1 = czso.find({'vuzemi_kod':{'$in':krajList},'vek_kod':{'$gt': "410015610020000"},'pohlavi_kod':{'$nin':['1','2']}})
-#df2_1 = DataFrame(list(result2_1))
-#print(df2_1)
-#df2_1.to_csv('pokus.csv')
-result2 = czso.aggregate([
-    { '$match': {'vuzemi_kod':{'$in':krajList},'vek_kod':{'$gt': "410015610020000"},'pohlavi_kod':{'$nin':['1','2']}}},
-    #{ '$group': { '_id':{'Pohlavi':'$pohlavi_kod','Kraj':'$vuzemi_kod'},'PopCount': {'$sum': '$hodnota'}}}
-    { '$group': { '_id':'$vuzemi_kod','PopCount': {'$sum': {'$toInt':'$hodnota'}}}}
-])
-df2 = DataFrame(list(result2))
-#print(df2)
-#print(df2['PopCount'].sum())
-
-df3 = merge(df1_1,df2,how='outer',on='_id')
-df3 = df3.rename(columns={"_id": "vuzemi_kod"})
-#print(df3)
-
-result4 = czso.aggregate([{'$group':{'_id':{'vuzemi_kod':'$vuzemi_kod','vuzemi_txt':'$vuzemi_txt'}}}])
-mytempList = (list(result4))
-mytempDir = {}
-for item in mytempList:
-    itemID = item['_id']
-    mytempDir[itemID['vuzemi_kod']]=itemID['vuzemi_txt']
-#print(mytempDir)
-s4 = Series(mytempDir,name='vuzemi_txt')
-s4.index.name = 'vuzemi_kod'
-df4 = merge(df3,s4,on='vuzemi_kod')
-#print(df4)
-
-csv_file = "queryB1.csv"
-df4.to_csv(csv_file)
