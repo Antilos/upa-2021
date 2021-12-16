@@ -14,3 +14,5 @@ Dále stahuje soubory z daty, předzpracovává data a vkládá je do databáze.
 Argument skriptu: drop-db umožňuje smazání dat v databázi.
 
 ## Druhá část projektu
+Skripty queryXX.py pro získávání dat z databáze, zpracování a uložení do queryXX.csv souborů. Skripty plotXX.py pro vytvoření grafů. Tyto skripty jsou spouštěny bez argumentů.
+Podrobnosti o dotazech a výsledky v dokumentaci.
