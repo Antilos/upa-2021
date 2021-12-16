@@ -31,6 +31,10 @@ oborCntList = []
 for obor in oborlist:
     auxdf = df[df['OborPece'] == obor]
     auxdf = auxdf.sort_values(by=['retrieved'])
+    
+    #normalize
+    #auxdf['OborCount'] = auxdf['OborCount'].apply(lambda x : float(x)/float(max(auxdf['OborCount'])))
+    
     #print(auxdf)
     # values for last month are messed up
     auxdf = auxdf[auxdf['retrieved'] != '2021-11']
