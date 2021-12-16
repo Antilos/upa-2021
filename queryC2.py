@@ -70,6 +70,10 @@ for obor in obory20:
 df = DataFrame.from_records(oborCountDictList)
 # print(df)
 
+csv_file_raw = "queryC2_raw.csv"
+df.to_csv(csv_file_raw)
+
+
 #normalize col 2019-03
 df = df.astype({'2019-03':'float'})
 for i, row in df.iterrows():
