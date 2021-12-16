@@ -1,11 +1,9 @@
 # queryB1.py
 # Jiří Žilka (xzilka11)
 # UPA 2021/2022
-# question B1
+# question B1 - get data from DB
 
 import csv
-from re import match
-from numpy.testing._private.utils import tempdir
 from pymongo import MongoClient
 from pprint import pprint
 from pandas import DataFrame
@@ -48,7 +46,6 @@ obor = 'v\x9aeobecné praktické lékařství'
 result1 = nrpzs.aggregate( [
     { '$match': {'OborPece':obor, 'retrieved':newestDate}},
     { '$group': { '_id':'$KrajKod', 'OborCount': { '$sum': 1 } } }
-    #,{ '$project': {'OborPece':1,'retrieved':1,'OborCount':1}}    
 ] )
 df1 = DataFrame(list(result1))
 #print(df1)
@@ -57,24 +54,15 @@ df1_1 = replaceKrajKod(df1,krajDict)
 #print(df1_1)
 
 krajList = list(krajDict.values())
-#result2_0 = czso.find({'vuzemi_kod':{'$in':krajList}}).limit(10)
-#print(DataFrame(list(result2_0)))
-#result2_1 = czso.find({'vuzemi_kod':{'$in':krajList},'vek_kod':{'$gt': "410015610020000"},'pohlavi_kod':{'$nin':['1','2']}})
-#df2_1 = DataFrame(list(result2_1))
-#print(df2_1)
-#df2_1.to_csv('pokus.csv')
+
 result2 = czso.aggregate([
     { '$match': {'vuzemi_kod':{'$in':krajList},'vek_kod':{'$gt': "410015610020000"},'pohlavi_kod':{'$nin':['1','2']}}},
-    #{ '$group': { '_id':{'Pohlavi':'$pohlavi_kod','Kraj':'$vuzemi_kod'},'PopCount': {'$sum': '$hodnota'}}}
     { '$group': { '_id':'$vuzemi_kod','PopCount': {'$sum': {'$toInt':'$hodnota'}}}}
 ])
 df2 = DataFrame(list(result2))
-#print(df2)
-#print(df2['PopCount'].sum())
 
 df3 = merge(df1_1,df2,how='outer',on='_id')
 df3 = df3.rename(columns={"_id": "vuzemi_kod"})
-#print(df3)
 
 result4 = czso.aggregate([{'$group':{'_id':{'vuzemi_kod':'$vuzemi_kod','vuzemi_txt':'$vuzemi_txt'}}}])
 mytempList = (list(result4))
