@@ -39,6 +39,10 @@ for obor in oborlist:
     print(auxdf)
     # values for last month are messed up TODO
     auxdf = auxdf[auxdf['retrieved'] != '2021-11']
+
+    #normalize
+    auxdf['OborCount'] = auxdf['OborCount'].apply(lambda x : float(x)/float(max(auxdf['OborCount'])))
+
     tempList = auxdf['OborCount'].to_list()
     ax.plot(xvals,tempList,label=obor)
 
